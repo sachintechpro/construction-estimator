@@ -47,7 +47,8 @@ class Handler(BaseHTTPRequestHandler):
         except Exception:
             return self.reply(500, '{"error":"Internal server error"}')
 
-
 if __name__ == '__main__':
-    print('Open http://127.0.0.1:8000')
-    ThreadingHTTPServer(('127.0.0.1', 8000), Handler).serve_forever()
+    import os
+    port = int(os.environ.get('PORT', '8000'))
+    print(f'Server running on port {port}')
+    ThreadingHTTPServer(('0.0.0.0', port), Handler).serve_forever()
