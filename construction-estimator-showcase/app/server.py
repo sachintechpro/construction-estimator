@@ -23,6 +23,8 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         route = urlparse(self.path).path
+        if route == '/qa-bench.html':
+            return self.reply(200, (ROOT / 'web' / 'qa-bench.html').read_text(encoding='utf-8'), 'text/html')
         if route == '/':
             return self.reply(200, HTML.read_text(encoding='utf-8'), 'text/html')
         if route == '/api/catalog':
